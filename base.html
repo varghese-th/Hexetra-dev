@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<style>
+
+.body-modified {
+    margin: 0;
+    padding: 0;
+    background-color: #F2F4F4;  
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: #FFF;
+    box-shadow: 0 4px #EAEDED;
+    position: fixed;
+    width: 100%;
+}
+
+.navbar ul {
+    margin: 12px 0;
+    padding: 0;
+}
+
+.navbar a {
+    display: block;
+    color: #566573;
+    text-align: center;
+    margin: 14px 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.navbar a:hover {
+    color: #E5050F;
+}
+
+.navbar .navbar-left-menu ul {
+    list-style-type: none;
+    float: left;
+    margin-left: 1%;
+}
+
+.navbar .navbar-right-menu ul {
+    list-style-type: none;
+    float: right;
+    margin-right: 3%;
+    /*margin-left: 60%;*/
+}
+
+.navbar .navbar-right-menu li {
+    float: left;
+}
+
+.navbar .navbar-contact a {
+    color: #E5050F;
+    margin: 0;
+    margin: 7px 4px;
+    padding: 5px 10px;
+    border: 2px solid #E5050F;
+    border-radius: 10px;
+}
+
+.navbar .navbar-contact a:hover {
+    color: #FFF;
+    background-color: #E5050F;
+}
+
+.navbar .navbar-right-menu .dropdown-content {
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    min-width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.navbar .navbar-right-menu .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.navbar .navbar-right-menu .dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.navbar .navbar-right-menu .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.small-navbar-icon {
+    display: none;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border: 2px solid #000;
+    border-radius: 8px;
+    background-color: #FFF;
+}
+
+
+.small-navbar {
+    display: none;
+    position: fixed;
+    top: 73px;
+    width: 98%;
+    background-color: #FFF;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
+}
+
+.small-navbar .navbar-right-menu a {
+    float: none;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: #566573;
+}
+
+.small-navbar .navbar-right-menu ul {
+    list-style-type: none;
+    float: left;
+}
+
+.small-navbar .navbar-contact a {
+    color: #E5050F;
+    margin: 0;
+    margin: 7px 4px;
+    padding: 5px 10px;
+    border: 2px solid #E5050F;
+    border-radius: 10px;
+    max-width: 90px;
+}
+
+.small-navbar .navbar-right-menu .dropdown-content {
+    display: none;
+    position: relative;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.small-navbar .navbar-right-menu .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+@media only screen and (max-width: 767px) {
+    .navbar .navbar-right-menu {
+        display: none;
+    }
+
+    .small-navbar-icon {
+        display: block;
+    }
+}
+
+.enquiry-button {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    height: 45px;
+    width: 45px;
+    background-color: #0EDAE3;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 45px;
+    z-index: 9999;
+}
+
+.enquiry-button a {
+    text-decoration: none;
+    font-size: 30px;
+    color: #FFF;
+ }
+
+
+/* The actual popup */
+.enquiry-button .enquiry-popuptext,
+.enquiry-button .enquiry-popuptext-forjquery {
+    display: none;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 9999;
+    bottom: 125%;
+    left: 5px;
+    /*margin-right: 100px;*/
+    font-size: 16px;
+}
+
+/* Popup arrow */
+.enquiry-button .enquiry-popuptext::after,
+.enquiry-button .enquiry-popuptext-forjquery::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -70px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.enquiry-button:hover .enquiry-popuptext {
+    display: block;
+}
+
+
+
+</style>
+</head>
+<body class="body-modified">
+
+
+<nav id="navbar" class="navbar">
+    <div class="navbar-left-menu">
+        <ul>
+            <li><a href="">hello</a></li>
+        </ul>       
+    </div>
+    <div class="navbar-right-menu">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li class="dropdown"><a href="">products <span class="fa fa-caret-down"></span></a>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </li>
+            <li><a href="#contact">enquiry</a></li>
+            <li class="navbar-contact"><a href="#about">contact us</a></li>
+        </ul>
+    </div>
+    <button class="small-navbar-icon"><span class="fa fa-bars"></span></button>
+</nav>
+
+<div class="small-navbar">
+    <div class="navbar-right-menu">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li class="dropdown"><a>products <span class="fa fa-caret-down"></span></a>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </li>
+            <li><a href="#contact">enquiry</a></li>
+            <li class="navbar-contact"><a href="#about">contact us</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<script>
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+    var currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        document.getElementById("navbar").style.top = "0";
+      } else {
+        document.getElementById("navbar").style.top = "-100px";
+      }
+      prevScrollpos = currentScrollPos;
+    }
+</script>
+
+<script>
+    $(document).ready(function(){
+        $(".small-navbar-icon").click(function(){
+            $(".small-navbar").toggle('slow');
+        });
+
+        $(".dropdown").click(function(){
+            $(".dropdown-content").toggle('slow');
+        });
+});
+</script>
+
+<div class="enquiry-button">
+    <span><a href="">&#9993;</a></span>
+    <span class="enquiry-popuptext">Click for Enquiry !</span>
+    <span class="enquiry-popuptext-forjquery">Click for Enquiry !</span>
+</div>
+
+
+
+<script>
+$(document).ready(function(){
+ 
+    $(".enquiry-popuptext-forjquery").delay(2000).fadeIn(500);
+    $(".enquiry-popuptext-forjquery").delay(4000).fadeOut(1000);
+
+});
+
+</script>
+
+
+</body>
+</html>
